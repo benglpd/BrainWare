@@ -1,44 +1,47 @@
 ﻿<div class="jumbotron">
-    <h1>BrainWare Orders</h1>
-    <p class="lead">This is the BrainWare orders page! Welcome</p>
+	<h1>BrainWare Orders</h1>
+	<p class="lead">This is the BrainWare orders page! Welcome</p>
 </div>
 <div class="row">
-    <div class="col-md-12">
-        <h2>Your Orders</h2>
-        <div id="orders"></div>
-    </div>
-  
+	<div class="col-md-12">
+		<h2>Your Orders</h2>
+		<div id="orders"></div>
+	</div>
+
 </div>
 <script>
-    $(document).ready(function () {
-        var $orders = $('#orders');
-        $.ajax({
-            'url': '/api/order/1',
-            'type': 'GET',
-            'success': function (data) {
+	$(document).ready(function () {
+		var $orders = $('#orders');
+		$.ajax({
+			'url': '/api/order/1',
+			'type': 'GET'
+		})
+			.done(function (data) {
 
-                var $orderList = $('<ul/>');
+				var $orderList = $('<ul/>');
+				debugger;
+				if (data) {
+					$.each(data,
+						function (i) {
+							var $li = $('<li/>').text(this.Description + ' (Total: $' + this.OrderTotal + ')')
+								.appendTo($orderList);
 
-                if (data) {
-                    $.each(data,
-                        function(i) {
-                            var $li = $('<li/>').text(this.Description + ' (Total: $' + this.OrderTotal + ')')
-                                .appendTo($orderList);
+							var $productList = $('<ul/>');
 
-                            var $productList = $('<ul/>');
+							$.each(this.OrderProducts, function (j) {
+								var $li2 = $('<li/>').text(this.Product.Name + ' (' + this.Quantity + ' @@ $' + this.Price + '/ea)')
+									.appendTo($productList);
+							});
 
-                            $.each(this.OrderProducts, function(j) {
-                                var $li2 = $('<li/>').text(this.Product.Name + ' ('+ this.Quantity +' @@ $' + this.Price + '/ea)')
-                                    .appendTo($productList);
-                            });
+							$productList.appendTo($li);
+						});
 
-                            $productList.appendTo($li);
-                        });
-
-                    $orders.append($orderList);
-                }
-            }
-        });
-    });
+					$orders.append($orderList);
+				}
+			})
+			.fail(function () {
+				$orders.append("<h4>Cannot load data from the server. Please try again lager.</h5>");
+			});
+	});
 </script>
 

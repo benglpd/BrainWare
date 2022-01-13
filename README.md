@@ -38,3 +38,18 @@ Change the AttachDbFile name to the full path of the BrainWare.mdf file (located
 - Set the project Web, as the start up project
 - Press F5
 - Expected a browser is open with the result of the first order
+
+
+## Changes
+There are many ways to refactor the project. With a small amount of time, folders are used to separate modules
+- Domain / Core
+- Services
+- Infrastructure
+- API Controllers
+- UI / Views
+
+## Improvements
+- Migrate application to .NET Core
+- Add logging
+- Add error handling
+- Use Blazor for UI

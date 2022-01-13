@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace Web.Models
 {
-    using System.Security.AccessControl;
-
-    public class Order
+	public class Order
     {
         public int OrderId { get; set; }
 
@@ -19,6 +14,23 @@ namespace Web.Models
 
         public List<OrderProduct> OrderProducts { get; set; }
 
+        public Order()
+        {
+
+        }
+
+        public Order(Web.Domain.Entities.Order entity)
+        {
+            this.OrderId = entity.Id;
+            this.CompanyName = entity.Company.Name;
+            this.Description = entity.Description;
+            this.OrderTotal = entity.Total;
+            this.OrderProducts = new List<OrderProduct>();
+            foreach (Domain.Entities.OrderProduct detail in entity.Details)
+            {
+                this.OrderProducts.Add(new OrderProduct(detail));
+            }
+        }
     }
 
 
@@ -34,6 +46,20 @@ namespace Web.Models
 
         public decimal Price { get; set; }
 
+        public OrderProduct()
+        {
+
+        }
+
+        public OrderProduct(Domain.Entities.OrderProduct entity)
+            : this()
+        {
+            this.OrderId = entity.OrderId;
+            this.ProductId = entity.ProductId;
+            this.Price = entity.Price;
+            this.Quantity = entity.Quantity;
+            this.Product = new Product(entity.Product);
+        }
     }
 
     public class Product
@@ -41,5 +67,17 @@ namespace Web.Models
         public string Name { get; set; }
 
         public decimal Price { get; set; }
+
+        public Product()
+        {
+
+        }
+
+        public Product(Domain.Entities.Product entity)
+            : this()
+        {
+            this.Name = entity.Name;
+            this.Price = entity.Price;
+        }
     }
 }
