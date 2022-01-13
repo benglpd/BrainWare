@@ -41,7 +41,8 @@ Change the AttachDbFile name to the full path of the BrainWare.mdf file (located
 
 
 ## Changes
-There are many ways to refactor the project. With a small amount of time, I went with the simple DDD implementation.
+There are many ways to refactor the project. With a small amount of time, I went with the simple DDD and EF style implementation.
+- Move connection string to web.config for easy deployment.
 - Domain / Core
 - Services
 - Infrastructure
