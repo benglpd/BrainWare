@@ -41,7 +41,7 @@ Change the AttachDbFile name to the full path of the BrainWare.mdf file (located
 
 
 ## Changes
-There are many ways to refactor the project. With a small amount of time, folders are used to separate modules
+There are many ways to refactor the project. With a small amount of time, I went with the simple DDD implementation.
 - Domain / Core
 - Services
 - Infrastructure
