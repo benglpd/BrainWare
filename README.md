@@ -50,7 +50,7 @@ There are many ways to refactor the project. With a small amount of time, I went
 - UI / Views
 
 ## Improvements
-- Migrate application to .NET Core
+- Migrate application to .NET Core for faster and easier DI implementation
 - Add logging
 - Add error handling
 - Use Blazor for UI
